@@ -1,86 +1,71 @@
 package com.development.nero.cellnovotechnicalexercise;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Records
 {
     private String id;
-    private String price;
-    private String category_name;
-    private String description;
     private String name;
-    private String category_id;
-    private transient int position;
+    private String description;
+    private String price;
+    private String categoryId;
+    private String categoryName;
+    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-    public int getPosition() {
-        return position;
-    }
-
-    public void setPosition(int position) {
-        this.position = position;
-    }
-
-    public String getId ()
-    {
+    public String getId() {
         return id;
     }
 
-    public void setId (String id)
-    {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public String getPrice ()
-    {
-        return price;
-    }
-
-    public void setPrice (String price)
-    {
-        this.price = price;
-    }
-
-    public String getCategory_name ()
-    {
-        return category_name;
-    }
-
-    public void setCategory_name (String category_name)
-    {
-        this.category_name = category_name;
-    }
-
-    public String getDescription ()
-    {
-        return description;
-    }
-
-    public void setDescription (String description)
-    {
-        this.description = description;
-    }
-
-    public String getName ()
-    {
+    public String getName() {
         return name;
     }
 
-    public void setName (String name)
-    {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public String getCategory_id ()
-    {
-        return category_id;
+    public String getDescription() {
+        return description;
     }
 
-    public void setCategory_id (String category_id)
-    {
-        this.category_id = category_id;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    @Override
-    public String toString()
-    {
-        return "ClassPojo [id = "+id+", price = "+price+", category_name = "+category_name+", description = "+description+", name = "+name+", category_id = "+category_id+"]";
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public String getCategoryId() {
+        return categoryId;
+    }
+
+    public void setCategoryId(String categoryId) {
+        this.categoryId = categoryId;
+    }
+
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+    }
+
+    public Map<String, Object> getAdditionalProperties() {
+        return this.additionalProperties;
+    }
+
+    public void setAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
     }
 }

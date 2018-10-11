@@ -1,32 +1,29 @@
 package com.development.nero.cellnovotechnicalexercise;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class MyPojo
+
 {
-    private Records[] records;
-    private transient int position;
+    private List<Records> records = null;
+    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-    public int getPosition() {
-        return position;
-    }
-
-    public void setPosition(int position) {
-        this.position = position;
-    }
-
-    public Records[] getRecords ()
-    {
+    public List<Records> getRecords() {
         return records;
     }
 
-    public void setRecords (Records[] records)
-    {
+    public void setRecords(List<Records> records) {
         this.records = records;
     }
 
-    @Override
-    public String toString()
-    {
-        return "ClassPojo [records = "+records+"]";
+    public Map<String, Object> getAdditionalProperties() {
+        return this.additionalProperties;
+    }
+
+    public void setAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
     }
 }
 

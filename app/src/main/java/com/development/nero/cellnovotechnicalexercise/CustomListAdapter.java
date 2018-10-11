@@ -13,13 +13,13 @@ import java.util.ArrayList;
 
 public class CustomListAdapter extends RecyclerView.Adapter<CustomListAdapter.ProductViewHolder> {
 
-    ArrayList<Records> recordsArrayList;
+    ArrayList<MyPojo> myPojoArrayList;
     Context context;
     //Interactor
 
-    public CustomListAdapter(Context context, ArrayList<Records> recordsArrayList){
+    public CustomListAdapter(Context context, ArrayList<MyPojo> myPojoArrayList){
         this.context = context;
-        this.recordsArrayList = recordsArrayList;
+        this.myPojoArrayList = myPojoArrayList;
     }
 
     @NonNull
@@ -33,13 +33,13 @@ public class CustomListAdapter extends RecyclerView.Adapter<CustomListAdapter.Pr
 
     @Override
     public void onBindViewHolder(@NonNull ProductViewHolder productViewHolder, int i) {
-        final Records records = recordsArrayList.get(i);
-        records.setPosition(i);
-
-        productViewHolder.name.setText(records.getName());
-        productViewHolder.description.setText(records.getDescription());
-        productViewHolder.price.setText(records.getPrice());
-        productViewHolder.category.setText(records.getCategory_id());
+        final MyPojo pojo = myPojoArrayList.get(i);
+//        pojo.setPosition(i);
+//
+        productViewHolder.name.setText(pojo.getRecords().get(i).getName());
+        productViewHolder.description.setText(pojo.getRecords().get(i).getName());
+        productViewHolder.price.setText(pojo.getRecords().get(i).getPrice());
+        productViewHolder.category.setText(pojo.getRecords().get(i).getCategoryName());
 
         productViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,7 +51,7 @@ public class CustomListAdapter extends RecyclerView.Adapter<CustomListAdapter.Pr
 
     @Override
     public int getItemCount() {
-        return recordsArrayList.size();
+        return myPojoArrayList.size();
     }
 
     class ProductViewHolder extends RecyclerView.ViewHolder{
