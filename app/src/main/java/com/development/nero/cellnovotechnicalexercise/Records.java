@@ -9,9 +9,22 @@ public class Records
     private String name;
     private String description;
     private String price;
-    private String categoryId;
-    private String categoryName;
+    private String category_id;
+    private String category_name;
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
+    public Records(){
+
+    }
+
+    public Records(String id, String name, String description, String price, String category_id, String category_name) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.category_id = category_id;
+        this.category_name = category_name;
+    }
 
     public String getId() {
         return id;
@@ -46,19 +59,19 @@ public class Records
     }
 
     public String getCategoryId() {
-        return categoryId;
+        return category_id;
     }
 
     public void setCategoryId(String categoryId) {
-        this.categoryId = categoryId;
+        this.category_id = categoryId;
     }
 
     public String getCategoryName() {
-        return categoryName;
+        return category_name;
     }
 
     public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
+        this.category_name = categoryName;
     }
 
     public Map<String, Object> getAdditionalProperties() {

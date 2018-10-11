@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,9 +25,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class HomeScreen extends AppCompatActivity {
 
     RelativeLayout aboutUS, search, products;
+    TextView productCount;
     RecyclerView recyclerView;
     Context context;
     ArrayList<MyPojo> records;
+    private SQLiteDatabaseHandler db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,18 +40,18 @@ public class HomeScreen extends AppCompatActivity {
         search = findViewById(R.id.search_view);
         products = findViewById(R.id.product_view);
         recyclerView = findViewById(R.id.recyclerView);
+        productCount = findViewById(R.id.product_Count);
 
         LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
-
         recyclerView.setLayoutManager(llm);
 
         setButtonViewColor(aboutUS, "#e87c41");
         setButtonViewColor(search, "#d183ce");
         setButtonViewColor(products, "#5871af");
 
+        db = new SQLiteDatabaseHandler(this);
         getProducts();
-        System.out.print("getProducts");
     }
 
     public void getProducts(){
@@ -65,13 +68,25 @@ public class HomeScreen extends AppCompatActivity {
             public void onResponse(Call<MyPojo> call, Response<MyPojo> response) {
                 if(response.body() != null){
                     for (int i = 0; i < response.body().getRecords().size(); i++){
-                        Records responseRecord = response.body().getRecords().get(i);
                         records.add(i, response.body());
+                        Records myRecord = new Records(records.get(i).getRecords().get(i).getId(),
+                                records.get(i).getRecords().get(i).getName(),
+                                records.get(i).getRecords().get(i).getDescription(),
+                                records.get(i).getRecords().get(i).getPrice(),
+                                records.get(i).getRecords().get(i).getCategoryId(),
+                                records.get(i).getRecords().get(i).getCategoryName());
+
+                        db.addRecords(myRecord);
                     }
+
+                    int count = records.size();
+                    productCount.setText(String.valueOf(count));
+
                     CustomListAdapter customListAdapter = new CustomListAdapter(
                             context, records
                     );
                     recyclerView.setAdapter(customListAdapter);
+                    Records myRecord = db.getRecord(42);
                 }
             }
 
@@ -81,14 +96,6 @@ public class HomeScreen extends AppCompatActivity {
             }
         });
     }
-//        if(response.body() != null){
-//            for(int i = 0; i < response.body().size(); i++){
-////                        Records responseRecord = response.body().get(i);
-////                        records.add(responseRecord);
-//                //}
-//                CustomListAdapter adapter = new CustomListAdapter(
-//                        context, records);
-//                recyclerView.setAdapter(adapter);
 
     public void setButtonViewColor(RelativeLayout view, String color){
         GradientDrawable gradientDrawable = (GradientDrawable) view.getBackground().mutate();

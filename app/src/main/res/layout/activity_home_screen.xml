@@ -6,12 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".HomeScreen">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-    </android.support.v7.widget.RecyclerView>
-
     <RelativeLayout
         android:id="@+id/about_us_view"
         android:layout_width="match_parent"
@@ -32,31 +26,11 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="PRODUCTS"
+            android:text="About Us"
             android:textSize="25dp"
             android:textStyle="bold"
             android:textColor="#ffff"
             android:layout_centerInParent="true"/>
-
-        <RelativeLayout
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:src="@mipmap/ic_launcher"
-            android:layout_alignParentRight="true"
-            android:background="@drawable/circle"
-            android:layout_marginRight="30dp"
-            android:layout_marginTop="10dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="6"
-                android:textSize="30dp"
-                android:textColor="#ffff"
-                android:layout_centerInParent="true"
-                android:textStyle="bold"
-                />
-        </RelativeLayout>
     </RelativeLayout>
 
     <RelativeLayout
@@ -76,38 +50,58 @@
             android:layout_alignParentLeft="true"
             android:layout_margin="20dp"/>
 
-        <TextView
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="PRODUCTS"
-            android:textSize="25dp"
-            android:textStyle="bold"
-            android:textColor="#ffff"
-            android:layout_centerInParent="true"/>
-
-        <EditText
-            android:layout_width="200dp"
-            android:layout_height="wrap_content" />
-
-        <RelativeLayout
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:src="@mipmap/ic_launcher"
-            android:layout_alignParentRight="true"
-            android:background="@drawable/circle"
-            android:layout_marginRight="30dp"
-            android:layout_marginTop="10dp">
-
+            android:layout_centerInParent="true"
+            android:orientation="vertical"
+            android:gravity="center">
             <TextView
+                android:id="@+id/searchTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="6"
-                android:textSize="30dp"
-                android:textColor="#ffff"
-                android:layout_centerInParent="true"
+                android:text="Search"
+                android:textSize="25dp"
                 android:textStyle="bold"
-                />
-        </RelativeLayout>
+                android:textColor="#ffff" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/searchEditText"
+                    android:layout_width="170dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:background="@color/white"
+                    android:textColor="@color/black"
+                    android:textAlignment="center"
+                    android:hint="Enter search query"
+                    android:layout_marginTop="18dp"/>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/ic_launcher"
+                    android:background="@drawable/square"
+                    android:layout_marginLeft="20dp"
+                    android:layout_toRightOf="@id/searchEditText">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Go"
+                        android:textSize="25dp"
+                        android:textColor="@color/black"
+                        android:layout_centerInParent="true"
+                        android:textStyle="bold"
+                        />
+                </RelativeLayout>
+            </RelativeLayout>
+        </LinearLayout>
+
+
     </RelativeLayout>
 
     <RelativeLayout
@@ -131,7 +125,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="PRODUCTS"
+            android:text="Products"
             android:textSize="25dp"
             android:textStyle="bold"
             android:textColor="#ffff"
@@ -147,6 +141,7 @@
             android:layout_marginTop="10dp">
 
             <TextView
+                android:id="@+id/product_Count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="6"
@@ -156,5 +151,20 @@
                 android:textStyle="bold"
                 />
         </RelativeLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/product_view"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="30dp">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </android.support.v7.widget.RecyclerView>
     </RelativeLayout>
 </RelativeLayout>
