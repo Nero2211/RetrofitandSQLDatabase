@@ -3,6 +3,7 @@ package com.development.nero.cellnovotechnicalexercise;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.CursorIndexOutOfBoundsException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -56,18 +57,23 @@ public class SQLiteDatabaseHandler extends SQLiteOpenHelper {
                 new String[] {String.valueOf(id)},
                 null, null, null, null);
 
-        if(cursor != null) cursor.moveToFirst();
+        if(cursor != null) {
+            cursor.moveToFirst();
+        }
 
         List<Records> records= new ArrayList<>();
         MyPojo myPojo = new MyPojo();
         Records myRecord = new Records();
-
-        myRecord.setId(cursor.getString(0));
-        myRecord.setName(cursor.getString(1));
-        myRecord.setDescription(cursor.getString(2));
-        myRecord.setPrice(cursor.getString(3));
-        myRecord.setCategoryId(cursor.getString(4));
-        myRecord.setCategoryName(cursor.getString(5));
+        try {
+            myRecord.setId(cursor.getString(0));
+            myRecord.setName(cursor.getString(1));
+            myRecord.setDescription(cursor.getString(2));
+            myRecord.setPrice(cursor.getString(3));
+            myRecord.setCategoryId(cursor.getString(4));
+            myRecord.setCategoryName(cursor.getString(5));
+        }catch (CursorIndexOutOfBoundsException e){
+            myRecord = null;
+        }
 
         records.add(myRecord);
         myPojo.setRecords(records);

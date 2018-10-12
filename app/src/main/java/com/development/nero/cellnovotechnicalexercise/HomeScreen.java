@@ -3,6 +3,7 @@ package com.development.nero.cellnovotechnicalexercise;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -24,7 +25,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class HomeScreen extends AppCompatActivity {
+public class HomeScreen extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
 
     RelativeLayout aboutUS, search, products, searchQueryBtn;
     EditText searchET;
@@ -33,6 +34,7 @@ public class HomeScreen extends AppCompatActivity {
     Context context;
     ArrayList<MyPojo> myPojoArrayList;
     private SQLiteDatabaseHandler db;
+    SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +47,7 @@ public class HomeScreen extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerView);
         searchET = findViewById(R.id.searchEditText);
         productCount = findViewById(R.id.product_Count);
+        swipeRefreshLayout = findViewById(R.id.swipeRefreshLayout);
 
         searchQueryBtn = findViewById(R.id.search_Query_btn);
 
@@ -58,6 +61,13 @@ public class HomeScreen extends AppCompatActivity {
 
         db = new SQLiteDatabaseHandler(this);
         getProducts();
+
+        swipeRefreshLayout.setOnRefreshListener(this);
+        swipeRefreshLayout.setOnRefreshListener(this);
+        swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary,
+                android.R.color.holo_green_dark,
+                android.R.color.holo_orange_dark,
+                android.R.color.holo_blue_dark);
 
         searchQueryBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,15 +113,19 @@ public class HomeScreen extends AppCompatActivity {
                             context, myPojoArrayList
                     );
                     recyclerView.setAdapter(customListAdapter);
-
                 }
             }
 
             @Override
             public void onFailure(Call<MyPojo> call, Throwable t) {
-
+                Toast.makeText(context, "Failed to extract the data from API," +
+                        "please try again later", Toast.LENGTH_LONG).show();
             }
         });
+
+        if (swipeRefreshLayout.isRefreshing()) {
+            swipeRefreshLayout.setRefreshing(false);
+        }
     }
 
     public void setButtonViewColor(RelativeLayout view, String color){
@@ -124,14 +138,25 @@ public class HomeScreen extends AppCompatActivity {
 
         List<Records> recordsList = new ArrayList<>();
         Records myRecord = db.getRecord(id);
-        recordsList.add(myRecord);
+        if(myRecord != null) {
+            recordsList.add(myRecord);
 
-        MyPojo myPojo = new MyPojo();
-        myPojo.setRecords(recordsList);
-        myPojoArrayList.add(myPojo);
-        CustomListAdapter searchAdapter = new CustomListAdapter(
-                context, myPojoArrayList
-        );
-        recyclerView.setAdapter(searchAdapter);
+            MyPojo myPojo = new MyPojo();
+            myPojo.setRecords(recordsList);
+            myPojoArrayList.add(myPojo);
+            CustomListAdapter searchAdapter = new CustomListAdapter(
+                    context, myPojoArrayList
+            );
+            recyclerView.setAdapter(searchAdapter);
+        }
+        else{
+            Toast.makeText(HomeScreen.this, "Item not found, please try again!", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    @Override
+    public void onRefresh() {
+        getProducts();
+
     }
 }
