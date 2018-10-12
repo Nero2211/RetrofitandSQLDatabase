@@ -2,6 +2,7 @@ package com.development.nero.cellnovotechnicalexercise;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
@@ -76,6 +77,14 @@ public class HomeScreen extends AppCompatActivity implements SwipeRefreshLayout.
                 }else {
                     populateSearchedDataInRecycler(Integer.parseInt(searchET.getText().toString()));
                 }
+            }
+        });
+
+        aboutUS.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(HomeScreen.this, AboutUs.class);
+                startActivity(intent);
             }
         });
     }
