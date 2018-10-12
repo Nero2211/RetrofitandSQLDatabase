@@ -6,4 +6,7 @@
     <color name="black">#ff000000</color>
     <color name="lightGrey">#efefef</color>
     <color name="white">#fff</color>
+    <color name="aboutUs">#e87c41</color>
+    <color name="search">#d183ce</color>
+    <color name="product">#5871af</color>
 </resources>

@@ -67,10 +67,6 @@ public class HomeScreen extends AppCompatActivity implements SwipeRefreshLayout.
 
         swipeRefreshLayout.setOnRefreshListener(this);
         swipeRefreshLayout.setOnRefreshListener(this);
-        swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary,
-                android.R.color.holo_green_dark,
-                android.R.color.holo_orange_dark,
-                android.R.color.holo_blue_dark);
 
         searchQueryBtn.setOnClickListener(new View.OnClickListener() {
             @Override
