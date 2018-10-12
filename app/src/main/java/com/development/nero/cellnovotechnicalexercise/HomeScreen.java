@@ -1,9 +1,12 @@
 package com.development.nero.cellnovotechnicalexercise;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
+import android.os.Build;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -147,6 +150,7 @@ public class HomeScreen extends AppCompatActivity implements SwipeRefreshLayout.
             CustomListAdapter searchAdapter = new CustomListAdapter(
                     context, myPojoArrayList
             );
+            productCount.setText(String.valueOf(myPojoArrayList.size()));
             recyclerView.setAdapter(searchAdapter);
         }
         else{
@@ -156,7 +160,25 @@ public class HomeScreen extends AppCompatActivity implements SwipeRefreshLayout.
 
     @Override
     public void onRefresh() {
-        getProducts();
-
+        AlertDialog.Builder builder;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            builder = new AlertDialog.Builder(HomeScreen.this, android.R.style.Theme_Material_Dialog_Alert);
+        } else {
+            builder = new AlertDialog.Builder(HomeScreen.this);
+        }
+        builder.setTitle("Refresh List")
+                .setMessage("Get products list from API? \n (This will clear the searched results)")
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        getProducts();
+                    }
+                })
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        // do nothing
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
     }
 }
