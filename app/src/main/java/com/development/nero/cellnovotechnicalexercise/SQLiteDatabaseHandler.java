@@ -12,7 +12,7 @@ import java.util.List;
 public class SQLiteDatabaseHandler extends SQLiteOpenHelper {
 
     private static final int DATABASE_VERSION = 1;
-    private static final String DATABASE_NAME = "RecordsDB";
+    private static final String DATABASE_NAME = "Records.db";
     private static final String TABLE_NAME = "Records";
     private static final String KEY_ID = "id";
     private static final String NAME = "name";
@@ -32,13 +32,12 @@ public class SQLiteDatabaseHandler extends SQLiteOpenHelper {
 
     public SQLiteDatabaseHandler(Context context){
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        SQLiteDatabase db = this.getWritableDatabase();
     }
 
     @Override
     public void onCreate(android.database.sqlite.SQLiteDatabase sqLiteDatabase) {
-        String CREATION_TABLE = "CREATE TABLE Records ( "
-                + "id TEXT, name TEXT, description TEXT, price TEXT," +
-                "category_id TEXT, category_name TEXT)";
+        String CREATION_TABLE = "CREATE TABLE " + TABLE_NAME +" (id TEXT, name TEXT, description TEXT, price TEXT, category_id TEXT, category_name TEXT)";
 
         sqLiteDatabase.execSQL(CREATION_TABLE);
     }
@@ -46,7 +45,7 @@ public class SQLiteDatabaseHandler extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(android.database.sqlite.SQLiteDatabase sqLiteDatabase, int i, int i1) {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
-        this.onCreate(sqLiteDatabase);
+        onCreate(sqLiteDatabase);
     }
 
     public Records getRecord(int id){
@@ -79,7 +78,7 @@ public class SQLiteDatabaseHandler extends SQLiteOpenHelper {
     public void addRecords(Records records){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put("KEY_ID", records.getId());
+        values.put("ID", records.getId());
         values.put("NAME", records.getName());
         values.put("DESCRIPTION", records.getDescription());
         values.put("PRICE", records.getPrice());

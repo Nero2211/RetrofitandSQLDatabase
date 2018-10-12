@@ -86,7 +86,7 @@ public class HomeScreen extends AppCompatActivity {
                             context, records
                     );
                     recyclerView.setAdapter(customListAdapter);
-                    Records myRecord = db.getRecord(42);
+                    //Records myRecord = db.getRecord(42);
                 }
             }
 
