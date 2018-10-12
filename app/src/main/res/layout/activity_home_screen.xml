@@ -77,10 +77,12 @@
                     android:background="@color/white"
                     android:textColor="@color/black"
                     android:textAlignment="center"
+                    android:inputType="number"
                     android:hint="Enter search query"
                     android:layout_marginTop="18dp"/>
 
                 <RelativeLayout
+                    android:id="@+id/search_Query_btn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@mipmap/ic_launcher"

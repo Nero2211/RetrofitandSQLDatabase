@@ -14,6 +14,7 @@ import java.util.ArrayList;
 public class CustomListAdapter extends RecyclerView.Adapter<CustomListAdapter.ProductViewHolder> {
 
     ArrayList<MyPojo> myPojoArrayList;
+    Records records;
     Context context;
     //Interactor
 
@@ -34,8 +35,7 @@ public class CustomListAdapter extends RecyclerView.Adapter<CustomListAdapter.Pr
     @Override
     public void onBindViewHolder(@NonNull ProductViewHolder productViewHolder, int i) {
         final MyPojo pojo = myPojoArrayList.get(i);
-//        pojo.setPosition(i);
-//
+
         productViewHolder.name.setText(pojo.getRecords().get(i).getName());
         productViewHolder.description.setText(pojo.getRecords().get(i).getName());
         productViewHolder.price.setText(pojo.getRecords().get(i).getPrice());
