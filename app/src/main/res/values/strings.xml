@@ -1,4 +1,17 @@
 <resources>
     <string name="app_name">Cellnovo Technical Exercise</string>
     <string name="aboutCompanyDescription">We believe that conventional diabetes care technology is stuck in the past, and that it has failed to put first the needs and wants of patients who have to live with the condition and the daily demands of its treatment. Those with diabetes should be put back in control, and they should live a life that is as unaffected as possible by the need to manage their condition. The experience of managing diabetes should be as positive as possible. Thoughtful and innovative design should make things easier to understand and simpler to use. With belief in these ideals, we tore up convention. When we started, we did so with a focus only on how modern technology and beautiful design would make life easier for someone managing diabetes.</string>
+    <string name="ourVisionTitle">Our vision</string>
+    <string name="easeOfLifeTitle">Ease of life</string>
+    <string name="subHeading1">Technology has made so much of our lives easier.</string>
+    <string name="subInformation1">
+        Children today already wonder how we ever managed to rely on telephone kiosks, VHS and even CDs. We’ve all become used to making and receiving calls wherever we are and to having our music collections, and all the information we need, tucked into a convenient pocket.\n\n
+The Cellnovo vision is that those who rely on medical devices should benefit from the same advances in technology to improve the care they receive and to make their lives easier.\n\n
+The life today of a typical Type 1 diabetes patient is a relentless daily routine of testing, tracking, calculating and journal keeping. Our vision is that through elegant design and the thoughtful integration of everyday technology into medical systems, we can restore ease of life by providing freedom from the cumbersome, burdensome and obstructive procedures of traditional diabetes management.
+    </string>
+    <string name="betterWayTitle">Better way</string>
+    <string name="subHeading2">We at Cellnovo believe that there is a better way.</string>
+    <string name="subInformation2">We continually met with and gained advice from a broad set of passionate individuals including physicians, nurses, payers, and most importantly, people living with diabetes and their families.\n\n
+They, too, have dared to dream and transform the way we manage diabetes. We are forever grateful for their tireless dedication and passion.</string>
+    <string name="visitCellNovo">Visit CellNovo</string>
 </resources>
