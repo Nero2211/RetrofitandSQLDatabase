@@ -34,8 +34,12 @@ public class SplashActivity extends AwesomeSplash {
        configSplash.setRevealFlagX(Flags.REVEAL_RIGHT);
        configSplash.setRevealFlagX(Flags.REVEAL_TOP);
 
-       configSplash.setTitleSplash("BitBytec");
-       configSplash.setTitleTextSize(50f);
+       configSplash.setLogoSplash(R.drawable.cnlogo);
+       configSplash.setAnimLogoSplashDuration(1000);
+       configSplash.setAnimLogoSplashTechnique(Techniques.FadeIn);
+
+       configSplash.setTitleSplash("Products Exercise");
+       configSplash.setTitleTextSize(30f);
        configSplash.setAnimTitleDuration(1000);
     }
 

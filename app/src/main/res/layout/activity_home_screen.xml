@@ -9,26 +9,26 @@
     <RelativeLayout
         android:id="@+id/about_us_view"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="@dimen/dp100"
         android:background="@drawable/buttonshape"
         android:layout_alignParentBottom="true"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp">
+        android:layout_marginLeft="@dimen/dp10"
+        android:layout_marginRight="@dimen/dp10"
+        android:layout_marginTop="@dimen/dp10">
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/running"
             android:layout_alignParentLeft="true"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"/>
+            android:layout_marginTop="@dimen/dp20"
+            android:layout_marginBottom="@dimen/dp20"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="About Us"
-            android:textSize="25dp"
+            android:textSize="@dimen/sp25"
             android:textStyle="bold"
             android:textColor="#ffff"
             android:layout_centerInParent="true"/>
@@ -37,20 +37,20 @@
     <RelativeLayout
         android:id="@+id/search_view"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="@dimen/dp100"
         android:background="@drawable/buttonshape"
         android:layout_above="@id/about_us_view"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp">
+        android:layout_marginLeft="@dimen/dp10"
+        android:layout_marginRight="@dimen/dp10"
+        android:layout_marginTop="@dimen/dp10">
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/restaurant"
             android:layout_alignParentLeft="true"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"/>
+            android:layout_marginTop="@dimen/dp20"
+            android:layout_marginBottom="@dimen/dp20"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -63,7 +63,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Search"
-                android:textSize="25dp"
+                android:textSize="@dimen/sp25"
                 android:textStyle="bold"
                 android:textColor="#ffff" />
 
@@ -73,15 +73,15 @@
 
                 <EditText
                     android:id="@+id/searchEditText"
-                    android:layout_width="170dp"
+                    android:layout_width="@dimen/dp170"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="30dp"
+                    android:layout_marginLeft="@dimen/dp30"
                     android:background="@color/white"
                     android:textColor="@color/black"
                     android:textAlignment="center"
                     android:inputType="number"
                     android:hint="Enter search query"
-                    android:layout_marginTop="18dp"/>
+                    android:layout_marginTop="@dimen/dp18"/>
 
                 <RelativeLayout
                     android:id="@+id/search_Query_btn"
@@ -89,14 +89,14 @@
                     android:layout_height="wrap_content"
                     android:src="@mipmap/ic_launcher"
                     android:background="@drawable/square"
-                    android:layout_marginLeft="20dp"
+                    android:layout_marginLeft="@dimen/dp20"
                     android:layout_toRightOf="@id/searchEditText">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Go"
-                        android:textSize="25dp"
+                        android:textSize="@dimen/sp25"
                         android:textColor="@color/black"
                         android:layout_centerInParent="true"
                         android:textStyle="bold"
@@ -111,12 +111,12 @@
     <RelativeLayout
         android:id="@+id/product_view"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="@dimen/dp100"
         android:background="@drawable/buttonshape"
         android:layout_above="@+id/search_view"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginLeft="@dimen/dp10"
+        android:layout_marginRight="@dimen/dp10"
+        android:layout_marginTop="@dimen/dp10"
         android:orientation="horizontal">
 
         <ImageView
@@ -124,33 +124,33 @@
             android:layout_height="wrap_content"
             android:src="@drawable/water"
             android:layout_alignParentLeft="true"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"/>
+            android:layout_marginTop="@dimen/dp20"
+            android:layout_marginBottom="@dimen/dp20"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Products"
-            android:textSize="25dp"
+            android:textSize="@dimen/sp25"
             android:textStyle="bold"
             android:textColor="#ffff"
             android:layout_centerInParent="true"/>
 
         <RelativeLayout
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="@dimen/dp70"
+            android:layout_height="@dimen/dp70"
             android:src="@mipmap/ic_launcher"
             android:layout_alignParentRight="true"
             android:background="@drawable/circle"
-            android:layout_marginRight="30dp"
-            android:layout_marginTop="10dp">
+            android:layout_marginRight="@dimen/dp30"
+            android:layout_marginTop="@dimen/dp10">
 
             <TextView
                 android:id="@+id/product_Count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="6"
-                android:textSize="30dp"
+                android:textSize="@dimen/sp30"
                 android:textColor="#ffff"
                 android:layout_centerInParent="true"
                 android:textStyle="bold"
@@ -162,9 +162,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@id/product_view"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="30dp">
+        android:layout_marginLeft="@dimen/dp10"
+        android:layout_marginRight="@dimen/dp10"
+        android:layout_marginTop="@dimen/dp10">
 
         <android.support.v4.widget.SwipeRefreshLayout
             android:id="@+id/swipeRefreshLayout"
