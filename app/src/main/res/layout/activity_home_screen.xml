@@ -79,7 +79,6 @@
                     android:background="@color/white"
                     android:textColor="@color/black"
                     android:textAlignment="center"
-                    android:inputType="number"
                     android:hint="Enter search query"
                     android:layout_marginTop="@dimen/dp18"/>
 

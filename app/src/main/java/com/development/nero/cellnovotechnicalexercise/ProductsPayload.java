@@ -4,17 +4,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class MyPojo
+public class ProductsPayload
 
 {
-    private List<Records> records = null;
+    private List<Product> records = null;
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-    public List<Records> getRecords() {
+    public List<Product> getProducts() {
         return records;
     }
 
-    public void setRecords(List<Records> records) {
+    public void setProducts(List<Product> records) {
         this.records = records;
     }
 

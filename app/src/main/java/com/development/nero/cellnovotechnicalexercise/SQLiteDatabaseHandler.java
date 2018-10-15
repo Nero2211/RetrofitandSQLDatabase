@@ -13,7 +13,7 @@ import java.util.List;
 public class SQLiteDatabaseHandler extends SQLiteOpenHelper {
 
     private static final int DATABASE_VERSION = 1;
-    private static final String DATABASE_NAME = "Records.db";
+    private static final String DATABASE_NAME = "Product.db";
     private static final String TABLE_NAME = "Records";
     private static final String KEY_ID = "id";
     private static final String NAME = "name";
@@ -49,7 +49,55 @@ public class SQLiteDatabaseHandler extends SQLiteOpenHelper {
         onCreate(sqLiteDatabase);
     }
 
-    public Records getRecord(int id){
+    public List<Product> getRecord(String id){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = ((android.database.sqlite.SQLiteDatabase) db).query(TABLE_NAME,
+                COLUMNS,
+                "name LIKE '%"+ id +"%'",
+                null,
+                null, null, null, null);
+
+        if(cursor == null) {
+            throw new CursorIndexOutOfBoundsException("CursorIndexOutOfBoundsException");
+        }
+
+        List<Product> records= new ArrayList<>();
+        ProductsPayload productsPayload = new ProductsPayload();
+        Product myRecord = null;
+
+        while (cursor.moveToNext()) {
+            myRecord = new Product();
+            myRecord.setId(cursor.getString(0));
+            myRecord.setName(cursor.getString(1));
+            myRecord.setDescription(cursor.getString(2));
+            myRecord.setPrice(cursor.getString(3));
+            myRecord.setCategoryId(cursor.getString(4));
+            myRecord.setCategoryName(cursor.getString(5));
+            records.add(myRecord);
+        }
+
+        //product.add(myRecord);
+        productsPayload.setProducts(records);
+
+        //return myRecord;
+        return records;
+    }
+
+    public void addRecords(Product product){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("ID", product.getId());
+        values.put("NAME", product.getName());
+        values.put("DESCRIPTION", product.getDescription());
+        values.put("PRICE", product.getPrice());
+        values.put("CATEGORY_ID", product.getCategoryId());
+        values.put("CATEGORY_NAME", product.getCategoryName());
+
+        db.insert(TABLE_NAME, null, values);
+        db.close();
+    }
+
+    public Product getRecordbyID(int id){
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = ((android.database.sqlite.SQLiteDatabase) db).query(TABLE_NAME,
                 COLUMNS,
@@ -61,9 +109,9 @@ public class SQLiteDatabaseHandler extends SQLiteOpenHelper {
             cursor.moveToFirst();
         }
 
-        List<Records> records= new ArrayList<>();
-        MyPojo myPojo = new MyPojo();
-        Records myRecord = new Records();
+        List<Product> records= new ArrayList<>();
+        ProductsPayload productsPayload = new ProductsPayload();
+        Product myRecord = new Product();
         try {
             myRecord.setId(cursor.getString(0));
             myRecord.setName(cursor.getString(1));
@@ -76,22 +124,8 @@ public class SQLiteDatabaseHandler extends SQLiteOpenHelper {
         }
 
         records.add(myRecord);
-        myPojo.setRecords(records);
+        productsPayload.setProducts(records);
 
         return myRecord;
-    }
-
-    public void addRecords(Records records){
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put("ID", records.getId());
-        values.put("NAME", records.getName());
-        values.put("DESCRIPTION", records.getDescription());
-        values.put("PRICE", records.getPrice());
-        values.put("CATEGORY_ID", records.getCategoryId());
-        values.put("CATEGORY_NAME", records.getCategoryName());
-
-        db.insert(TABLE_NAME, null, values);
-        db.close();
     }
 }

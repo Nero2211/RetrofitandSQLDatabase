@@ -3,7 +3,7 @@ package com.development.nero.cellnovotechnicalexercise;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Records
+public class Product
 {
     private String id;
     private String name;
@@ -13,11 +13,11 @@ public class Records
     private String category_name;
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-    public Records(){
+    public Product(){
 
     }
 
-    public Records(String id, String name, String description, String price, String category_id, String category_name) {
+    public Product(String id, String name, String description, String price, String category_id, String category_name) {
         this.id = id;
         this.name = name;
         this.description = description;

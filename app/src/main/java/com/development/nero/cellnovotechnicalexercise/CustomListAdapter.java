@@ -3,24 +3,22 @@ package com.development.nero.cellnovotechnicalexercise;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class CustomListAdapter extends RecyclerView.Adapter<CustomListAdapter.ProductViewHolder> {
 
-    ArrayList<MyPojo> myPojoArrayList;
-    Records records;
+    List<Product> products;
     Context context;
-    //Interactor
 
-    public CustomListAdapter(Context context, ArrayList<MyPojo> myPojoArrayList){
+    public CustomListAdapter(Context context, List<Product> products){
         this.context = context;
-        this.myPojoArrayList = myPojoArrayList;
+        this.products = products;
     }
 
     @NonNull
@@ -34,24 +32,17 @@ public class CustomListAdapter extends RecyclerView.Adapter<CustomListAdapter.Pr
 
     @Override
     public void onBindViewHolder(@NonNull ProductViewHolder productViewHolder, int i) {
-        final MyPojo pojo = myPojoArrayList.get(i);
 
-        productViewHolder.name.setText(pojo.getRecords().get(i).getName());
-        productViewHolder.description.setText(pojo.getRecords().get(i).getName());
-        productViewHolder.price.setText(pojo.getRecords().get(i).getPrice());
-        productViewHolder.category.setText(pojo.getRecords().get(i).getCategoryName());
+        productViewHolder.name.setText(products.get(i).getName());
+        productViewHolder.description.setText(products.get(i).getDescription());
+        productViewHolder.price.setText(products.get(i).getPrice());
+        productViewHolder.category.setText(products.get(i).getCategoryName());
 
-        productViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
     }
 
     @Override
     public int getItemCount() {
-        return myPojoArrayList.size();
+        return products.size();
     }
 
     class ProductViewHolder extends RecyclerView.ViewHolder{
