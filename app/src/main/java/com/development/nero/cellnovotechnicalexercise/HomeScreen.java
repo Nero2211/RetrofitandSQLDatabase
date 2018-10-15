@@ -14,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
@@ -68,8 +69,9 @@ public class HomeScreen extends AppCompatActivity implements SwipeRefreshLayout.
         if(checkInternetState()) {
             getProducts();
         }else{
-            Toast.makeText(context, "Failed to extract data from the API as no Internet connection was found," +
-                    "Please try again once Internet is connected", Toast.LENGTH_LONG);
+            Toast.makeText(HomeScreen.this, "Failed to extract data from the API as no Internet connection was found," +
+                    "Trying to load from Database", Toast.LENGTH_LONG).show();
+            getAllProductsFromDatabase();
         }
 
         swipeRefreshLayout.setOnRefreshListener(this);
@@ -152,7 +154,6 @@ public class HomeScreen extends AppCompatActivity implements SwipeRefreshLayout.
                         "please try again later", Toast.LENGTH_LONG).show();
             }
         });
-
         if (swipeRefreshLayout.isRefreshing()) {
             swipeRefreshLayout.setRefreshing(false);
         }
@@ -173,7 +174,9 @@ public class HomeScreen extends AppCompatActivity implements SwipeRefreshLayout.
     }
 
     public void populateSearchedDataInRecycler(String id){
-        productsList.clear();
+        if(productsList != null){
+            productsList.clear();
+        }
 
         List<Product> products = null;
         try {
@@ -196,6 +199,39 @@ public class HomeScreen extends AppCompatActivity implements SwipeRefreshLayout.
         }
     }
 
+    public void getAllProductsFromDatabase(){
+        if(productsList != null) {
+            productsList.clear();
+        }
+
+        boolean databaseNotFound = false;
+        List<Product> products = null;
+        try {
+            products = db.getRecord(null);
+        }catch (Exception e){
+            Toast.makeText(HomeScreen.this, "Database not found", Toast.LENGTH_LONG).show();
+            Log.e("TAG", "Failure: " + e);
+            databaseNotFound = true;
+        }
+        if(databaseNotFound == false) {
+            if (products != null && products.size() != 0) {
+                ProductsPayload productsPayload = new ProductsPayload();
+                productsPayload.setProducts(products);
+
+                CustomListAdapter searchAdapter = new CustomListAdapter(
+                        context, products
+                );
+                productCount.setText(String.valueOf(products.size()));
+                recyclerView.setAdapter(searchAdapter);
+            } else {
+                Toast.makeText(HomeScreen.this, "No items found in the database!", Toast.LENGTH_LONG).show();
+            }
+        }
+        if (swipeRefreshLayout.isRefreshing()) {
+            swipeRefreshLayout.setRefreshing(false);
+        }
+    }
+
     @Override
     public void onRefresh() {
         AlertDialog.Builder builder;
@@ -208,7 +244,13 @@ public class HomeScreen extends AppCompatActivity implements SwipeRefreshLayout.
                 .setMessage("Get products list from API? \n (This will clear the searched results)")
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        getProducts();
+                        if(checkInternetState()) {
+                            getProducts();
+                        }else{
+                            Toast.makeText(HomeScreen.this, "Failed to extract data from the API as no Internet connection was found," +
+                                    "Trying to load from Database", Toast.LENGTH_LONG).show();
+                            getAllProductsFromDatabase();
+                        }
                     }
                 })
                 .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {

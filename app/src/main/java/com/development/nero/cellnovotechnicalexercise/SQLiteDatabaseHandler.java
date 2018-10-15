@@ -49,19 +49,25 @@ public class SQLiteDatabaseHandler extends SQLiteOpenHelper {
         onCreate(sqLiteDatabase);
     }
 
+
     public List<Product> getRecord(String id){
         SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = ((android.database.sqlite.SQLiteDatabase) db).query(TABLE_NAME,
-                COLUMNS,
-                "name LIKE '%"+ id +"%'",
-                null,
-                null, null, null, null);
+        Cursor cursor;
+        if(id == null){
+            cursor = db.rawQuery("select * from " + TABLE_NAME, null);
+        }else {
+            cursor = ((android.database.sqlite.SQLiteDatabase) db).query(TABLE_NAME,
+                    COLUMNS,
+                    "name LIKE '%" + id + "%'",
+                    null,
+                    null, null, null, null);
+        }
 
         if(cursor == null) {
             throw new CursorIndexOutOfBoundsException("CursorIndexOutOfBoundsException");
         }
 
-        List<Product> records= new ArrayList<>();
+        List<Product> products= new ArrayList<>();
         ProductsPayload productsPayload = new ProductsPayload();
         Product myRecord = null;
 
@@ -73,14 +79,10 @@ public class SQLiteDatabaseHandler extends SQLiteOpenHelper {
             myRecord.setPrice(cursor.getString(3));
             myRecord.setCategoryId(cursor.getString(4));
             myRecord.setCategoryName(cursor.getString(5));
-            records.add(myRecord);
+            products.add(myRecord);
         }
-
-        //product.add(myRecord);
-        productsPayload.setProducts(records);
-
-        //return myRecord;
-        return records;
+        productsPayload.setProducts(products);
+        return products;
     }
 
     public void addRecords(Product product){
